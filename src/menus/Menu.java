@@ -37,6 +37,19 @@ public abstract class Menu {
         return Integer.parseInt(dato);
     }
 
+    public double pedirDatoDouble(String mensaje){
+        String dato;
+        ErrorValidacion datoValidado;
+        do {
+            dato = pedirDato(mensaje);
+            datoValidado = validarDouble(dato);
+            if (!datoValidado.esValido()) {
+                mostrarMensaje(datoValidado.getMensajeError());
+            }
+        } while (!datoValidado.esValido());
+        return Double.parseDouble(dato);
+    }
+
     public void mostrarMensaje(String mensaje){
         JOptionPane.showMessageDialog(null,mensaje);
     }
@@ -60,4 +73,19 @@ public abstract class Menu {
         }
         return new ErrorValidacion(null, true);
     }
+
+    private ErrorValidacion validarDouble(String dato){
+        double datoParseado;
+        try {
+            datoParseado = Double.parseDouble(dato);
+        } catch (NumberFormatException e) {
+            return new ErrorValidacion("El numeros decimal ingresado es invalido", false);
+        }
+        if (datoParseado < 0){
+            return new ErrorValidacion("Solo se permiten numeros positivos", false);
+        }
+        return new ErrorValidacion(null, true);
+    }
+
+
 }

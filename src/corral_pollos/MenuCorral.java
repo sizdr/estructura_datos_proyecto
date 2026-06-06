@@ -37,7 +37,7 @@ public class MenuCorral extends Menu {
                 String nombre = pedirDato("Ingresa el nombre del pollo");
                 String raza = pedirDato("Ingresa la raza del pollo");
                 int edad = pedirDatoNumerico("Ingresa la edad en meses");
-                double peso = pedirPeso("Ingresa el peso en kg (ej: 2.5)");
+                double peso = pedirDatoDouble("Ingresa el peso en kg (ej: 2.5)");
                 String salud = pedirDato("Estado de salud (sano, enfermo, en observacion, vacunado)");
                 listaCorral.agregar(new Pollo(id, nombre, raza, edad, peso, salud, true));
                 mostrarMensaje("Pollo registrado exitosamente.");
@@ -78,7 +78,7 @@ public class MenuCorral extends Menu {
                 String nuevoNombre = pedirDato("Nuevo nombre");
                 String nuevaRaza = pedirDato("Nueva raza");
                 int nuevaEdad = pedirDatoNumerico("Nueva edad en meses");
-                double nuevoPeso = pedirPeso("Nuevo peso en kg");
+                double nuevoPeso = pedirDatoDouble("Nuevo peso en kg");
                 String nuevaSalud = pedirDato("Nuevo estado de salud");
                 listaCorral.modificar(modId, nuevoNombre, nuevaRaza, nuevaEdad, nuevoPeso, nuevaSalud);
                 mostrarMensaje("Pollo modificado exitosamente.");
@@ -111,22 +111,4 @@ public class MenuCorral extends Menu {
         }
     }
 
-    private double pedirPeso(String mensaje) {
-        double peso = 0;
-        boolean valido = false;
-        while (!valido) {
-            String dato = pedirDato(mensaje);
-            try {
-                peso = Double.parseDouble(dato);
-                if (peso <= 0) {
-                    mostrarMensaje("El peso debe ser mayor a 0.");
-                } else {
-                    valido = true;
-                }
-            } catch (NumberFormatException e) {
-                mostrarMensaje("Ingresa un numero valido (ej: 2.5)");
-            }
-        }
-        return peso;
-    }
 }
