@@ -11,7 +11,7 @@ public abstract class Menu {
         procesarOpcion(opcionSeleccionada);
     }
 
-    public String pedirDato(String mensaje){
+    protected String pedirDato(String mensaje){
         String dato;
         ErrorValidacion datoValidado;
         do {
@@ -24,7 +24,7 @@ public abstract class Menu {
         return dato;
     }
 
-    public int pedirDatoNumerico(String mensaje){
+    protected int pedirDatoNumerico(String mensaje){
         String dato;
         ErrorValidacion datoValidado;
         do {
@@ -37,7 +37,7 @@ public abstract class Menu {
         return Integer.parseInt(dato);
     }
 
-    public double pedirDatoDouble(String mensaje){
+    protected double pedirDatoDouble(String mensaje){
         String dato;
         ErrorValidacion datoValidado;
         do {
@@ -50,7 +50,7 @@ public abstract class Menu {
         return Double.parseDouble(dato);
     }
 
-    public void mostrarMensaje(String mensaje){
+    protected void mostrarMensaje(String mensaje){
         JOptionPane.showMessageDialog(null,mensaje);
     }
 
