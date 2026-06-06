@@ -29,10 +29,10 @@ public class Lista {
         tamaño++;
     }
 
-    public Pollo buscarPorId(String id) {
+    public Pollo buscar(String id) {
         Nodo actual = cabeza;
         while (actual != null) {
-            if (actual.getValor().getId().equalsIgnoreCase(id)) {
+            if (actual.getValor().getId().equals(id)) {
                 return actual.getValor();
             }
             actual = actual.getSiguiente();
@@ -43,15 +43,14 @@ public class Lista {
     public boolean eliminar(String id) {
         if (vacia()) return false;
 
-        if (cabeza.getValor().getId().equalsIgnoreCase(id)) {
+        if (cabeza.getValor().getId().equals(id)) {
             cabeza = cabeza.getSiguiente();
             tamaño--;
             return true;
         }
-
         Nodo actual = cabeza;
         while (actual.getSiguiente() != null) {
-            if (actual.getSiguiente().getValor().getId().equalsIgnoreCase(id)) {
+            if (actual.getSiguiente().getValor().getId().equals(id)) {
                 actual.setSiguiente(actual.getSiguiente().getSiguiente());
                 tamaño--;
                 return true;
@@ -62,7 +61,7 @@ public class Lista {
     }
 
     public boolean modificar(String id, String nombre, String raza, int edad, double peso, String estado_salud) {
-        Pollo pollo = buscarPorId(id);
+        Pollo pollo = buscar(id);
         if (pollo == null) return false;
         pollo.setNombre(nombre);
         pollo.setRaza(raza);

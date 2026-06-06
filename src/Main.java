@@ -1,3 +1,5 @@
+import corral_pollos.Lista;
+import corral_pollos.MenuCorral;
 import linea_vacunacion.Cola;
 import linea_vacunacion.MenuVacunacion;
 
@@ -7,6 +9,9 @@ void main() {
     //Cola cola = new Cola();
     //MenuVacunacion menuVacunacion = new MenuVacunacion(cola);
     //menuVacunacion.seleccionarOpcion();
+    Lista listaCorral =  new Lista();
+    MenuCorral menuCorral =  new MenuCorral(listaCorral);
+    menuCorral.seleccionarOpcion();
 
 
 }
