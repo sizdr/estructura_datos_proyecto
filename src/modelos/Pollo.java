@@ -23,6 +23,10 @@ public class Pollo {
         this.activo = activo;
     }
 
+    public static String[] getEstadosValidos(){
+        return new String[]{"sano", "enfermo", "en observacion", "vacunado"};
+    }
+
     public String getId() {
         return id;
     }
