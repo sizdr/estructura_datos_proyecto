@@ -4,18 +4,34 @@ import javax.swing.*;
 
 public abstract class Menu {
     protected abstract String getOpciones();
-    protected abstract void procesarOpcion(int opcion);
+    protected abstract boolean procesarOpcion(int opcion) throws CancelarException;
 
     public void seleccionarOpcion(){
-        int opcionSeleccionada = pedirDatoNumerico(getOpciones() + "\nElige una opcion");
-        procesarOpcion(opcionSeleccionada);
+        boolean cerrarMenu;
+        int opcionSeleccionada;
+        do {
+            try {
+                 opcionSeleccionada= pedirDatoNumerico(getOpciones() + "\nElige una opcion");
+            } catch (CancelarException e) {
+                return;
+            }
+            try {
+                cerrarMenu = procesarOpcion(opcionSeleccionada);
+            } catch (CancelarException e){
+                mostrarMensaje(e.getMessage());
+                cerrarMenu = false;
+            }
+        } while (!cerrarMenu);
     }
 
-    protected String pedirDato(String mensaje){
+    protected String pedirDato(String mensaje) throws CancelarException {
         String dato;
         ErrorValidacion datoValidado;
         do {
             dato = JOptionPane.showInputDialog(null, mensaje);
+            if (dato == null) {
+                throw new CancelarException();
+            }
             datoValidado = validarString(dato);
             if (!datoValidado.esValido()) {
                 mostrarMensaje(datoValidado.getMensajeError());
@@ -24,7 +40,7 @@ public abstract class Menu {
         return dato;
     }
 
-    protected int pedirDatoNumerico(String mensaje){
+    protected int pedirDatoNumerico(String mensaje) throws CancelarException {
         String dato;
         ErrorValidacion datoValidado;
         do {
@@ -37,7 +53,7 @@ public abstract class Menu {
         return Integer.parseInt(dato);
     }
 
-    protected double pedirDatoDouble(String mensaje){
+    protected double pedirDatoDouble(String mensaje) throws CancelarException {
         String dato;
         ErrorValidacion datoValidado;
         do {
@@ -86,6 +102,4 @@ public abstract class Menu {
         }
         return new ErrorValidacion(null, true);
     }
-
-
 }

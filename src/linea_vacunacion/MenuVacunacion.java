@@ -18,16 +18,7 @@ public class MenuVacunacion extends Menu {
     }
 
     @Override
-    protected void procesarOpcion(int opcion) {
-        switch (opcion) {
-            case 1:
-                String id = pedirDato("Ingresa el id del pollo");
-                String nombre = pedirDato("Ingresa el nombre del pollo");
-                String raza = pedirDato("Ingresa la raza del pollo");
-                int edad = pedirDatoNumerico("Ingresa la edad en meses del pollo");
-                double peso;
-                String estado_salud;
-
-        }
+    protected boolean procesarOpcion(int opcion) {
+        return true;
     }
 }

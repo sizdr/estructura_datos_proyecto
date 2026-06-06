@@ -1,5 +1,6 @@
 package corral_pollos;
 
+import menus.CancelarException;
 import menus.Menu;
 import modelos.Pollo;
 
@@ -26,20 +27,22 @@ public class MenuCorral extends Menu {
     }
 
     @Override
-    protected void procesarOpcion(int opcion) {
+    protected boolean procesarOpcion(int opcion) throws CancelarException {
+        boolean cerrarMenu = false;
         switch (opcion) {
             case 1 -> registrarPollo();
             case 2 -> mostrarPollos();
             case 3 -> buscarPollo();
             case 4 -> mostrarEnfermos();
             case 5 -> editarPollo();
-            case 6 ->eliminarPollo();
-            case 7 -> mostrarMensaje("Regresando al menu principal");
+            case 6 -> eliminarPollo();
+            case 7 -> cerrarMenu = true;
             default ->mostrarMensaje("Opcion no valida.");
         }
+        return cerrarMenu;
     }
 
-    private void registrarPollo(){
+    private void registrarPollo() throws CancelarException {
         String id = pedirDato("Ingresa el ID del pollo");
         if (listaCorral.buscar(id) != null) {
             mostrarMensaje("Error: Ya existe un pollo con ese ID.");
@@ -78,7 +81,7 @@ public class MenuCorral extends Menu {
         mostrarMensaje(listaCorral.mostrarPollos());
     }
 
-    private void buscarPollo(){
+    private void buscarPollo() throws CancelarException {
         String id = pedirDato("Ingresa el ID del pollo a buscar");
         Pollo pollo = listaCorral.buscar(id);
         if (pollo == null) {
@@ -96,7 +99,7 @@ public class MenuCorral extends Menu {
         mostrarMensaje(listaCorral.mostrarEnfermos());
     }
 
-    private void eliminarPollo(){
+    private void eliminarPollo() throws CancelarException {
         String id = pedirDato("Ingresa el ID del pollo a eliminar");
         if (listaCorral.buscar(id) == null) {
             mostrarMensaje("No se encontro ningun pollo con ese ID.");
@@ -112,7 +115,7 @@ public class MenuCorral extends Menu {
         }
     }
 
-    private void editarPollo(){
+    private void editarPollo() throws CancelarException {
         String modId = pedirDato("Ingresa el ID del pollo a modificar");
         if (listaCorral.buscar(modId) == null) {
             mostrarMensaje("No se encontro ningun pollo con ese ID.");
