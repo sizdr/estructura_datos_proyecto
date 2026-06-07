@@ -18,7 +18,7 @@ public abstract class Menu {
             try {
                 cerrarMenu = procesarOpcion(opcionSeleccionada);
             } catch (CancelarException e){
-                mostrarMensaje(e.getMessage());
+                mostrarAviso(e.getMessage());
                 cerrarMenu = false;
             }
         } while (!cerrarMenu);
@@ -34,7 +34,7 @@ public abstract class Menu {
             }
             datoValidado = validarString(dato);
             if (!datoValidado.esValido()) {
-                mostrarMensaje(datoValidado.getMensajeError());
+                mostrarError(datoValidado.getMensajeError());
             }
         } while (!datoValidado.esValido());
         return dato;
@@ -47,7 +47,7 @@ public abstract class Menu {
             dato = pedirDato(mensaje);
             datoValidado = validarEntero(dato);
             if (!datoValidado.esValido()) {
-                mostrarMensaje(datoValidado.getMensajeError());
+                mostrarError(datoValidado.getMensajeError());
             }
         } while (!datoValidado.esValido());
         return Integer.parseInt(dato);
@@ -60,14 +60,22 @@ public abstract class Menu {
             dato = pedirDato(mensaje);
             datoValidado = validarDouble(dato);
             if (!datoValidado.esValido()) {
-                mostrarMensaje(datoValidado.getMensajeError());
+                mostrarError(datoValidado.getMensajeError());
             }
         } while (!datoValidado.esValido());
         return Double.parseDouble(dato);
     }
 
     protected void mostrarMensaje(String mensaje){
-        JOptionPane.showMessageDialog(null,mensaje);
+        JOptionPane.showMessageDialog(null,mensaje, "Titulo" ,JOptionPane.PLAIN_MESSAGE);
+    }
+
+    protected void mostrarError(String mensaje){
+        JOptionPane.showMessageDialog(null,mensaje, "Error" ,JOptionPane.ERROR_MESSAGE);
+    }
+
+    protected void mostrarAviso(String mensaje){
+        JOptionPane.showMessageDialog(null,mensaje, "Aviso" ,JOptionPane.WARNING_MESSAGE);
     }
 
     private ErrorValidacion validarString(String dato){

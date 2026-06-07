@@ -2,16 +2,23 @@ import corral_pollos.Lista;
 import corral_pollos.MenuCorral;
 import linea_vacunacion.Cola;
 import linea_vacunacion.MenuVacunacion;
+import modelos.Pollo;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+import javax.swing.*;
+
 void main() {
-    //Cola cola = new Cola();
-    //MenuVacunacion menuVacunacion = new MenuVacunacion(cola);
-    //menuVacunacion.seleccionarOpcion();
+    Cola cola = new Cola();
+    MenuVacunacion menuVacunacion = new MenuVacunacion(cola);
+
     Lista listaCorral =  new Lista();
     MenuCorral menuCorral =  new MenuCorral(listaCorral);
-    menuCorral.seleccionarOpcion();
 
+    MenuPrincipal menuPrincipal = new MenuPrincipal(menuCorral, menuVacunacion);
+
+    listaCorral.agregar(new Pollo("Daniel","Albino",6,2.2,"sano"));
+    listaCorral.agregar(new Pollo("Daniel","Albino",6,2.2,"Emfermo"));
+
+
+    menuPrincipal.seleccionarOpcion();
 
 }

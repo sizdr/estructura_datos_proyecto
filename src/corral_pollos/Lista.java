@@ -5,18 +5,27 @@ import modelos.Pollo;
 public class Lista {
     private Nodo cabeza;
     private int tamaño;
+    private int contadorId;
 
     public Lista() {
         cabeza = null;
         tamaño = 0;
+        contadorId = 1;
     }
 
     public boolean vacia() {
         return cabeza == null;
     }
 
+    public String generarId() {
+        String id = "P" + String.format("%03d", contadorId);;
+        contadorId++;
+        return id;
+    }
+
     public void agregar(Pollo pollo) {
         Nodo nuevoNodo = new Nodo(pollo);
+        nuevoNodo.getValor().setId(generarId());
         if (vacia()) {
             cabeza = nuevoNodo;
         } else {
@@ -72,7 +81,9 @@ public class Lista {
     }
 
     public String mostrarPollos() {
-        if (vacia()) return "El corral esta vacio.";
+        if (vacia()){
+            return "El corral esta vacio.";
+        }
         Nodo actual = cabeza;
         StringBuilder lista = new StringBuilder();
         while (actual != null) {
@@ -91,7 +102,9 @@ public class Lista {
             }
             actual = actual.getSiguiente();
         }
-        if (enfermos.length() == 0) return "No hay pollos enfermos.";
+        if (enfermos.isEmpty()) {
+            return "No hay pollos enfermos.";
+        }
         return enfermos.toString();
     }
 

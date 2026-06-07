@@ -16,6 +16,7 @@ public class MenuCorral extends Menu {
     @Override
     protected String getOpciones() {
         return """
+                GESTIÖN DE CORRAL
                 1. Registrar pollo
                 2. Mostrar pollos
                 3. Buscar pollo por ID
@@ -43,11 +44,6 @@ public class MenuCorral extends Menu {
     }
 
     private void registrarPollo() throws CancelarException {
-        String id = pedirDato("Ingresa el ID del pollo");
-        if (listaCorral.buscar(id) != null) {
-            mostrarMensaje("Error: Ya existe un pollo con ese ID.");
-            return;
-        }
         String nombre = pedirDato("Ingresa el nombre del pollo");
         String raza = pedirDato("Ingresa la raza del pollo");
         int edad = pedirDatoNumerico("Ingresa la edad en meses");
@@ -56,11 +52,11 @@ public class MenuCorral extends Menu {
         do {
              salud = pedirDato("Estado de salud (sano, enfermo, en observacion, vacunado)");
              if (!validarSalud(salud)) {
-                 mostrarMensaje("Salud invalido");
+                 mostrarError("Salud invalido");
              }
         } while (!validarSalud(salud));
         salud = salud.trim().toLowerCase();
-        listaCorral.agregar(new Pollo(id, nombre, raza, edad, peso, salud, true));
+        listaCorral.agregar(new Pollo(nombre, raza, edad, peso, salud));
         mostrarMensaje("Pollo registrado exitosamente.");
     }
 
@@ -85,7 +81,7 @@ public class MenuCorral extends Menu {
         String id = pedirDato("Ingresa el ID del pollo a buscar");
         Pollo pollo = listaCorral.buscar(id);
         if (pollo == null) {
-            mostrarMensaje("No se encontro ningun pollo con ese ID.");
+            mostrarAviso("No se encontro ningun pollo con ese ID.");
             return;
         }
         mostrarMensaje(pollo.toString());
@@ -93,7 +89,7 @@ public class MenuCorral extends Menu {
 
     private void mostrarEnfermos(){
         if (listaCorral.vacia()) {
-            mostrarMensaje("El corral esta vacio.");
+            mostrarAviso("El corral esta vacio.");
             return;
         }
         mostrarMensaje(listaCorral.mostrarEnfermos());
@@ -102,7 +98,7 @@ public class MenuCorral extends Menu {
     private void eliminarPollo() throws CancelarException {
         String id = pedirDato("Ingresa el ID del pollo a eliminar");
         if (listaCorral.buscar(id) == null) {
-            mostrarMensaje("No se encontro ningun pollo con ese ID.");
+            mostrarError("No se encontro ningun pollo con ese ID.");
             return;
         }
         int confirmar = JOptionPane.showConfirmDialog(null,
@@ -111,14 +107,14 @@ public class MenuCorral extends Menu {
             listaCorral.eliminar(id);
             mostrarMensaje("Pollo eliminado exitosamente.");
         } else {
-            mostrarMensaje("Operacion cancelada.");
+            mostrarAviso("Operacion cancelada.");
         }
     }
 
     private void editarPollo() throws CancelarException {
         String modId = pedirDato("Ingresa el ID del pollo a modificar");
         if (listaCorral.buscar(modId) == null) {
-            mostrarMensaje("No se encontro ningun pollo con ese ID.");
+            mostrarAviso("No se encontro ningun pollo con ese ID.");
             return;
         }
         String nuevoNombre = pedirDato("Nuevo nombre");

@@ -13,14 +13,14 @@ public class Pollo {
     private String estado_salud;
     private boolean activo;
 
-    public Pollo(String id, String nombre, String raza, int edad, double peso, String estado_salud, boolean activo) {
-        this.id = id;
+    public Pollo(String nombre, String raza, int edad, double peso, String estado_salud) {
+        this.id = null;
         this.nombre = nombre;
         this.raza = raza;
         this.edad = edad;
         this.peso = peso;
         this.estado_salud = estado_salud;
-        this.activo = activo;
+        this.activo = true;
     }
 
     public static String[] getEstadosValidos(){
@@ -85,12 +85,12 @@ public class Pollo {
 
     @Override
     public String toString() {
-        return "ID: " + id +
-                "  Nombre: " + nombre +
-                " Raza: " + raza +
-                "Edad: " + edad + " meses" +
-                " Peso: " + peso + " kg" +
-                " Salud: " + estado_salud +
-                " Activo: " + activo;
+        return "\nID: " + id +
+                "\nNombre: " + nombre +
+                "\nRaza: " + raza +
+                "\nEdad: " + edad + " meses" +
+                "\nPeso: " + peso + " kg" +
+                "\nSalud: " + estado_salud +
+                "\nActivo: " + (activo? "Si":"No");
     }
 }
