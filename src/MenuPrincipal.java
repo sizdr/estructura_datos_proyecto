@@ -18,15 +18,18 @@ public class MenuPrincipal extends Menu {
                 GRANJA INTELIGENTE
                 1. Gestionar corral de pollos
                 2. Gestionar linea de vacunacion
+                5. Salir
                 """;
     }
 
     @Override
     protected boolean procesarOpcion(int opcion) throws CancelarException {
+        boolean salirMenu = false;
         switch(opcion){
             case 1 -> menuCorral.seleccionarOpcion();
             case 2 -> menuVacunacion.seleccionarOpcion();
+            case 5 -> salirMenu = true;
         }
-        return false;
+        return salirMenu;
     }
 }
