@@ -6,18 +6,23 @@ import menus.Menu;
 public class MenuPrincipal extends Menu {
     private MenuCorral menuCorral;
     private MenuVacunacion menuVacunacion;
+    private MenuReporte menuReporte;
 
-    MenuPrincipal(MenuCorral menuCorral, MenuVacunacion menuVacunacion) {
+    MenuPrincipal(MenuCorral menuCorral, MenuVacunacion menuVacunacion,  MenuReporte menuReporte) {
         this.menuCorral = menuCorral;
         this.menuVacunacion = menuVacunacion;
+        this.menuReporte = menuReporte;
     }
 
     @Override
     protected String getOpciones() {
         return """
                 GRANJA INTELIGENTE
+                
                 1. Gestionar corral de pollos
                 2. Gestionar linea de vacunacion
+                3. Gestionar almacén de huevos\s
+                4. Ver reportes generales\s
                 5. Salir
                 """;
     }
@@ -28,7 +33,9 @@ public class MenuPrincipal extends Menu {
         switch(opcion){
             case 1 -> menuCorral.seleccionarOpcion();
             case 2 -> menuVacunacion.seleccionarOpcion();
+            case 4 -> menuReporte.seleccionarOpcion();
             case 5 -> salirMenu = true;
+            default ->mostrarError("Opcion no valida.");
         }
         return salirMenu;
     }

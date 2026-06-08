@@ -12,8 +12,9 @@ void main() {
 
     MenuCorral menuCorral =  new MenuCorral(listaCorral);
     MenuVacunacion menuVacunacion = new MenuVacunacion(cola, listaCorral);
+    MenuReporte menuReporte = new MenuReporte(listaCorral, cola);
 
-    MenuPrincipal menuPrincipal = new MenuPrincipal(menuCorral, menuVacunacion);
+    MenuPrincipal menuPrincipal = new MenuPrincipal(menuCorral, menuVacunacion, menuReporte);
 
     listaCorral.agregar(new Pollo("Daniel","Albino",6,2.2,"sano"));
     listaCorral.agregar(new Pollo("Daniel","Albino",6,2.2,"enfermo"));

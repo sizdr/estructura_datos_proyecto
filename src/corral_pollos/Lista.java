@@ -135,4 +135,16 @@ public class Lista {
         }
         return count;
     }
+
+    public int totalActivos(){
+        int contador = 0;
+        Nodo actual = cabeza;
+        while (actual != null) {
+            if (actual.getValor().isActivo()) {
+                contador++;
+            }
+            actual = actual.getSiguiente();
+        }
+        return contador;
+    }
 }
