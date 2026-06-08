@@ -1,3 +1,4 @@
+import AlmacenHuevos.MenuAlmacenHuevos;
 import corral_pollos.MenuCorral;
 import linea_vacunacion.MenuVacunacion;
 import menus.CancelarException;
@@ -7,11 +8,13 @@ public class MenuPrincipal extends Menu {
     private MenuCorral menuCorral;
     private MenuVacunacion menuVacunacion;
     private MenuReporte menuReporte;
+    private MenuAlmacenHuevos menuAlmacenHuevos;
 
-    MenuPrincipal(MenuCorral menuCorral, MenuVacunacion menuVacunacion,  MenuReporte menuReporte) {
+    MenuPrincipal(MenuCorral menuCorral, MenuVacunacion menuVacunacion,  MenuReporte menuReporte,  MenuAlmacenHuevos menuAlmacenHuevos) {
         this.menuCorral = menuCorral;
         this.menuVacunacion = menuVacunacion;
         this.menuReporte = menuReporte;
+        this.menuAlmacenHuevos = menuAlmacenHuevos;
     }
 
     @Override
@@ -21,8 +24,8 @@ public class MenuPrincipal extends Menu {
                 
                 1. Gestionar corral de pollos
                 2. Gestionar linea de vacunacion
-                3. Gestionar almacén de huevos\s
-                4. Ver reportes generales\s
+                3. Gestionar almacén de huevos
+                4. Ver reportes generales
                 5. Salir
                 """;
     }
@@ -33,6 +36,7 @@ public class MenuPrincipal extends Menu {
         switch(opcion){
             case 1 -> menuCorral.seleccionarOpcion();
             case 2 -> menuVacunacion.seleccionarOpcion();
+            case 3 -> menuAlmacenHuevos.seleccionarOpcion();
             case 4 -> menuReporte.seleccionarOpcion();
             case 5 -> salirMenu = true;
             default ->mostrarError("Opcion no valida.");

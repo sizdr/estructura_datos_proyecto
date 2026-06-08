@@ -1,3 +1,4 @@
+import AlmacenHuevos.PilaHuevos;
 import corral_pollos.Lista;
 import linea_vacunacion.Cola;
 import menus.CancelarException;
@@ -6,10 +7,12 @@ import menus.Menu;
 public class MenuReporte extends Menu {
     private Lista listaCorral;
     private Cola colaVacunacion;
+    private PilaHuevos pilaHuevos;
 
-    MenuReporte(Lista listaCorral, Cola cola) {
+    MenuReporte(Lista listaCorral, Cola cola, PilaHuevos pilaHuevos) {
         this.listaCorral = listaCorral;
         this.colaVacunacion = cola;
+        this.pilaHuevos = pilaHuevos;
     }
 
     @Override
@@ -35,6 +38,8 @@ public class MenuReporte extends Menu {
             case 2 -> totalPollosEnfermoss();
             case 3 -> totalPollosVacunados();
             case 4 -> totalPollosFilaVacunados();
+            case 5 -> totalHuevosAlmacenados();
+            case 6 -> totalPesoHuevos();
             case 7 -> cerrarMenu = true;
             default ->mostrarError("Opcion no valida.");
         }
@@ -55,5 +60,13 @@ public class MenuReporte extends Menu {
 
     private void totalPollosFilaVacunados(){
         mostrarDatos("Hay " + colaVacunacion.getTamaño() + " pollos en fila de vacunacion", "Totaal en fila de vaunacion");
+    }
+
+    private void totalHuevosAlmacenados(){
+        mostrarDatos("El almacén tiene " + pilaHuevos.totalHuevos() + " huevo(s) almacenado(s).", "Total huevos almaenados");
+    }
+
+    private void totalPesoHuevos(){
+        mostrarDatos("El almacén tiene " + pilaHuevos.pesoTotal() + "g de huevo almacenado", "Peso de huevos almaenados");
     }
 }
