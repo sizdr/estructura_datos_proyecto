@@ -6,6 +6,7 @@ public class Cola {
     private NodoCola frente;
     private NodoCola fin;
     private int tamaño;
+    private int vacunados;
 
     public Cola() {
         frente = null;
@@ -27,6 +28,7 @@ public class Cola {
           fin = nuevoNodo;
         }
         tamaño++;
+        vacunados++;
     }
 
     public Pollo desencolar(){
@@ -58,5 +60,9 @@ public class Cola {
 
     public Pollo getFrente() {
         return frente.getValor();
+    }
+
+    public int getVacunados() {
+        return vacunados;
     }
 }

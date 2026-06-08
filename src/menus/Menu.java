@@ -66,6 +66,48 @@ public abstract class Menu {
         return Double.parseDouble(dato);
     }
 
+    protected String pedirDato(String mensaje, String titulo, String valorPreedeterminado) throws CancelarException {
+        String dato;
+        ErrorValidacion datoValidado;
+        do {
+            dato = JOptionPane.showInputDialog(null, mensaje,titulo,JOptionPane.QUESTION_MESSAGE,null,null,valorPreedeterminado).toString();
+            if (dato == null) {
+                throw new CancelarException();
+            }
+            datoValidado = validarString(dato);
+            if (!datoValidado.esValido()) {
+                mostrarError(datoValidado.getMensajeError());
+            }
+        } while (!datoValidado.esValido());
+        return dato;
+    }
+
+    protected int pedirDatoNumerico(String mensaje, String titulo, int valorPreedeterminado) throws CancelarException {
+        String dato;
+        ErrorValidacion datoValidado;
+        do {
+            dato = pedirDato(mensaje, titulo, String.valueOf(valorPreedeterminado));
+            datoValidado = validarEntero(dato);
+            if (!datoValidado.esValido()) {
+                mostrarError(datoValidado.getMensajeError());
+            }
+        } while (!datoValidado.esValido());
+        return Integer.parseInt(dato);
+    }
+
+    protected double pedirDatoDouble(String mensaje, String titulo, double valorPreedeterminado) throws CancelarException {
+        String dato;
+        ErrorValidacion datoValidado;
+        do {
+            dato = pedirDato(mensaje, titulo, String.valueOf(valorPreedeterminado));
+            datoValidado = validarDouble(dato);
+            if (!datoValidado.esValido()) {
+                mostrarError(datoValidado.getMensajeError());
+            }
+        } while (!datoValidado.esValido());
+        return Double.parseDouble(dato);
+    }
+
     protected void mostrarMensaje(String mensaje){
         JOptionPane.showMessageDialog(null,mensaje);
     }

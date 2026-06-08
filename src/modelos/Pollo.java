@@ -13,6 +13,8 @@ public class Pollo {
     private String estadoSalud;
     private boolean activo;
 
+    Pollo(){}
+
     public Pollo(String nombre, String raza, int edad, double peso, String estado_salud) {
         this.id = null;
         this.nombre = nombre;
@@ -23,8 +25,17 @@ public class Pollo {
         this.activo = true;
     }
 
-    public static String[] getEstadosValidos(){
-        return new String[]{"sano", "enfermo", "en observacion", "vacunado"};
+    public static boolean estadoValido(String estado){
+        if (estado.equalsIgnoreCase("sano")){
+            return true;
+        }
+        if (estado.equalsIgnoreCase("enfermo")){
+            return true;
+        }
+        if (estado.equalsIgnoreCase("en observacion")){
+            return true;
+        }
+        return estado.equalsIgnoreCase("vacunado");
     }
 
     public String getId() {
@@ -85,7 +96,7 @@ public class Pollo {
 
     @Override
     public String toString() {
-        return "\nID: " + id +
+        return "ID: " + id +
                 "\nNombre: " + nombre +
                 "\nRaza: " + raza +
                 "\nEdad: " + edad + " meses" +

@@ -52,22 +52,13 @@ public class MenuCorral extends Menu {
         String salud;
         do {
              salud = pedirDato("Estado de salud (sano, enfermo, en observacion, vacunado)", titulo);
-             if (!validarSalud(salud)) {
-                 mostrarError("Salud invalido");
+             if (!Pollo.estadoValido(salud)) {
+                 mostrarError("Estado de salud invalido");
              }
-        } while (!validarSalud(salud));
+        } while (!Pollo.estadoValido(salud));
         salud = salud.trim().toLowerCase();
         listaCorral.agregar(new Pollo(nombre, raza, edad, peso, salud));
         mostrarMensaje("Pollo registrado exitosamente.");
-    }
-
-    private boolean validarSalud(String salud) {
-        for (String estado : Pollo.getEstadosValidos()) {
-            if (estado.equalsIgnoreCase(salud)) {
-                return true;
-            }
-        }
-        return false;
     }
 
     private void mostrarPollos(){
@@ -116,18 +107,13 @@ public class MenuCorral extends Menu {
 
     private void editarPollo() throws CancelarException {
         String titulo = "Editar Pollo";
-        String modId = pedirDato("Ingresa el ID del pollo a modificar",titulo);
-        if (listaCorral.buscar(modId) == null) {
+        String id = pedirDato("Ingresa el ID del pollo a modificar",titulo);
+        if (listaCorral.buscar(id) == null) {
             mostrarAviso("No se encontro ningun pollo con ese ID.");
             return;
         }
-        String nuevoNombre = pedirDato("Nuevo nombre",titulo);
-        String nuevaRaza = pedirDato("Nueva raza",titulo);
-        int nuevaEdad = pedirDatoNumerico("Nueva edad en meses",titulo);
-        double nuevoPeso = pedirDatoDouble("Nuevo peso en kg",titulo);
-        String nuevaSalud = pedirDato("Nuevo estado de salud",titulo);
-        listaCorral.modificar(modId, nuevoNombre, nuevaRaza, nuevaEdad, nuevoPeso, nuevaSalud);
-        mostrarMensaje("Pollo modificado exitosamente.");
+        EditarSubmenu editarSubmenu = new EditarSubmenu(listaCorral.buscar(id));
+        editarSubmenu.seleccionarOpcion();
     }
 
 }

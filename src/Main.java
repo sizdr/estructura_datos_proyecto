@@ -8,21 +8,18 @@ import javax.swing.*;
 
 void main() {
     Cola cola = new Cola();
-
     Lista listaCorral =  new Lista();
+
     MenuCorral menuCorral =  new MenuCorral(listaCorral);
     MenuVacunacion menuVacunacion = new MenuVacunacion(cola, listaCorral);
-
 
     MenuPrincipal menuPrincipal = new MenuPrincipal(menuCorral, menuVacunacion);
 
     listaCorral.agregar(new Pollo("Daniel","Albino",6,2.2,"sano"));
-    listaCorral.agregar(new Pollo("Daniel","Albino",6,2.2,"Emfermo"));
-    listaCorral.agregar(new Pollo("Daniel","Albino",6,2.2,"Emfermo"));
-    listaCorral.agregar(new Pollo("Daniel","Albino",6,2.2,"Emfermo"));
+    listaCorral.agregar(new Pollo("Daniel","Albino",6,2.2,"enfermo"));
+    listaCorral.agregar(new Pollo("Daniel","Albino",6,2.2,"enfermo"));
+    listaCorral.agregar(new Pollo("Daniel","Albino",6,2.2,"enfermo"));
     listaCorral.agregar(new Pollo("Daniel","Albino",6,2.2,"sano"));
 
-
     menuPrincipal.seleccionarOpcion();
-
 }

@@ -69,14 +69,14 @@ public class Lista {
         return false;
     }
 
-    public boolean modificar(String id, String nombre, String raza, int edad, double peso, String estado_salud) {
+    public boolean modificar(String id, Pollo nuevoValor) {
         Pollo pollo = buscar(id);
         if (pollo == null) return false;
-        pollo.setNombre(nombre);
-        pollo.setRaza(raza);
-        pollo.setEdad(edad);
-        pollo.setPeso(peso);
-        pollo.setEstadoSalud(estado_salud);
+        pollo.setNombre(nuevoValor.getNombre());
+        pollo.setRaza(nuevoValor.getRaza());
+        pollo.setEdad(nuevoValor.getEdad());
+        pollo.setPeso(nuevoValor.getPeso());
+        pollo.setEstadoSalud(nuevoValor.getEstadoSalud());
         return true;
     }
 
@@ -87,7 +87,7 @@ public class Lista {
         Nodo actual = cabeza;
         StringBuilder lista = new StringBuilder();
         while (actual != null) {
-            lista.append(actual.getValor().toString()).append("\n");
+            lista.append(actual.getValor().toString()).append("\n").append("-------------------").append("\n");
             actual = actual.getSiguiente();
         }
         return lista.toString();
@@ -98,7 +98,7 @@ public class Lista {
         StringBuilder enfermos = new StringBuilder();
         while (actual != null) {
             if (actual.getValor().getEstadoSalud().equalsIgnoreCase("enfermo")) {
-                enfermos.append(actual.getValor().toString()).append("\n");
+                enfermos.append(actual.getValor().toString()).append("\n").append("------------------").append("\n");
             }
             actual = actual.getSiguiente();
         }
@@ -134,17 +134,5 @@ public class Lista {
             actual = actual.getSiguiente();
         }
         return count;
-    }
-
-    public String mostrarIdsSanos(){
-        StringBuilder sanos = new StringBuilder();
-        Nodo actual = cabeza;
-        while (actual != null) {
-            if (actual.getValor().getEstadoSalud().equalsIgnoreCase("sano")) {
-                sanos.append("ID: ").append(actual.getValor().getId()).append("\n");
-            }
-            actual = actual.getSiguiente();
-        }
-        return sanos.toString();
     }
 }
