@@ -67,19 +67,19 @@ public abstract class Menu {
     }
 
     protected String pedirDato(String mensaje, String titulo, String valorPreedeterminado) throws CancelarException {
-        String dato;
+        Object dato;
         ErrorValidacion datoValidado;
         do {
-            dato = JOptionPane.showInputDialog(null, mensaje,titulo,JOptionPane.QUESTION_MESSAGE,null,null,valorPreedeterminado).toString();
+            dato = JOptionPane.showInputDialog(null, mensaje,titulo,JOptionPane.QUESTION_MESSAGE,null,null,valorPreedeterminado);
             if (dato == null) {
                 throw new CancelarException();
             }
-            datoValidado = validarString(dato);
+            datoValidado = validarString(dato.toString());
             if (!datoValidado.esValido()) {
                 mostrarError(datoValidado.getMensajeError());
             }
         } while (!datoValidado.esValido());
-        return dato;
+        return dato.toString();
     }
 
     protected int pedirDatoNumerico(String mensaje, String titulo, int valorPreedeterminado) throws CancelarException {

@@ -17,6 +17,7 @@ public class MenuCorral extends Menu {
     protected String getOpciones() {
         return """
                 GESTIÖN DE CORRAL
+                
                 1. Registrar pollo
                 2. Mostrar pollos
                 3. Buscar pollo por ID
@@ -112,8 +113,8 @@ public class MenuCorral extends Menu {
             mostrarAviso("No se encontro ningun pollo con ese ID.");
             return;
         }
-        EditarSubmenu editarSubmenu = new EditarSubmenu(listaCorral.buscar(id));
-        editarSubmenu.seleccionarOpcion();
+        SubmenuEditar submenuEditar = new SubmenuEditar(listaCorral.buscar(id));
+        submenuEditar.seleccionarOpcion();
     }
 
 }

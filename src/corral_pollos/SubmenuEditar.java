@@ -4,19 +4,22 @@ import menus.CancelarException;
 import menus.Menu;
 import modelos.Pollo;
 
-import java.awt.desktop.AboutEvent;
-
-public class EditarSubmenu extends Menu {
+public class SubmenuEditar extends Menu {
     Pollo polloActual;
 
-    EditarSubmenu(Pollo pollo) {
+    SubmenuEditar(Pollo pollo) {
         this.polloActual = pollo;
     }
 
     @Override
     protected String getOpciones() {
-        return polloActual.toString() +"""
+        return """
+                EDITAR POLLO\n
+                """ +
+                polloActual.toString() +
+                """
                 \n
+                OPCIONES
                 1. Editar nombre
                 2. Editar raza
                 3. Editar edad
@@ -36,12 +39,13 @@ public class EditarSubmenu extends Menu {
             case 4 -> editarPeso();
             case 5 -> editarEstado();
             case 6 -> cerrarMenu = true;
+            default ->mostrarError("Opcion no valida.");
         }
         return cerrarMenu;
     }
 
     public void editarNombre() throws CancelarException {
-        String nuevoNombre = pedirDato("Ingresa el nuevo nombre", "Edtiar nombre", polloActual.getNombre());
+        String nuevoNombre = pedirDato("Ingresa el nuevo nombre", "Editar nombre", polloActual.getNombre());
         polloActual.setNombre(nuevoNombre);
         mostrarMensaje("Nombre de pollo actualizado");
     }
@@ -53,13 +57,13 @@ public class EditarSubmenu extends Menu {
     }
 
     public void editarEdad() throws CancelarException {
-        int edad = pedirDatoNumerico("Ingresa el nuevo peso", "Editar peso");
+        int edad = pedirDatoNumerico("Ingresa el nuevo peso", "Editar peso", polloActual.getEdad());
         polloActual.setEdad(edad);
         mostrarMensaje("Edad de pollo actualizada");
     }
 
     public void editarPeso() throws CancelarException {
-        double peso = pedirDatoDouble("Ingresa el peso", "Editar peso");
+        double peso = pedirDatoDouble("Ingresa el peso", "Editar peso", polloActual.getPeso());
         polloActual.setPeso(peso);
         mostrarMensaje("Peso de pollo actualizada");
     }
