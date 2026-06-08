@@ -38,19 +38,20 @@ public class MenuCorral extends Menu {
             case 5 -> editarPollo();
             case 6 -> eliminarPollo();
             case 7 -> cerrarMenu = true;
-            default ->mostrarMensaje("Opcion no valida.");
+            default ->mostrarError("Opcion no valida.");
         }
         return cerrarMenu;
     }
 
     private void registrarPollo() throws CancelarException {
-        String nombre = pedirDato("Ingresa el nombre del pollo");
-        String raza = pedirDato("Ingresa la raza del pollo");
-        int edad = pedirDatoNumerico("Ingresa la edad en meses");
-        double peso = pedirDatoDouble("Ingresa el peso en kg (ej: 2.5)");
+        String titulo = "Registrar Pollo";
+        String nombre = pedirDato("Ingresa el nombre del pollo", titulo);
+        String raza = pedirDato("Ingresa la raza del pollo", titulo);
+        int edad = pedirDatoNumerico("Ingresa la edad en meses", titulo);
+        double peso = pedirDatoDouble("Ingresa el peso en kg (ej: 2.5)", titulo);
         String salud;
         do {
-             salud = pedirDato("Estado de salud (sano, enfermo, en observacion, vacunado)");
+             salud = pedirDato("Estado de salud (sano, enfermo, en observacion, vacunado)", titulo);
              if (!validarSalud(salud)) {
                  mostrarError("Salud invalido");
              }
@@ -74,17 +75,18 @@ public class MenuCorral extends Menu {
             mostrarMensaje("El corral esta vacio.");
             return;
         }
-        mostrarMensaje(listaCorral.mostrarPollos());
+        mostrarDatos(listaCorral.mostrarPollos(), "Pollos en corral");
     }
 
     private void buscarPollo() throws CancelarException {
-        String id = pedirDato("Ingresa el ID del pollo a buscar");
+        String titulo = "Buscar Pollo";
+        String id = pedirDato("Ingresa el ID del pollo a buscar",titulo);
         Pollo pollo = listaCorral.buscar(id);
         if (pollo == null) {
             mostrarAviso("No se encontro ningun pollo con ese ID.");
             return;
         }
-        mostrarMensaje(pollo.toString());
+        mostrarDatos(pollo.toString(), "Pollo con ID: " + id);
     }
 
     private void mostrarEnfermos(){
@@ -92,11 +94,12 @@ public class MenuCorral extends Menu {
             mostrarAviso("El corral esta vacio.");
             return;
         }
-        mostrarMensaje(listaCorral.mostrarEnfermos());
+        mostrarDatos(listaCorral.mostrarEnfermos(), "Pollos enfermos");
     }
 
     private void eliminarPollo() throws CancelarException {
-        String id = pedirDato("Ingresa el ID del pollo a eliminar");
+        String titulo = "Eliminar Pollo";
+        String id = pedirDato("Ingresa el ID del pollo a eliminar",titulo);
         if (listaCorral.buscar(id) == null) {
             mostrarError("No se encontro ningun pollo con ese ID.");
             return;
@@ -112,16 +115,17 @@ public class MenuCorral extends Menu {
     }
 
     private void editarPollo() throws CancelarException {
-        String modId = pedirDato("Ingresa el ID del pollo a modificar");
+        String titulo = "Editar Pollo";
+        String modId = pedirDato("Ingresa el ID del pollo a modificar",titulo);
         if (listaCorral.buscar(modId) == null) {
             mostrarAviso("No se encontro ningun pollo con ese ID.");
             return;
         }
-        String nuevoNombre = pedirDato("Nuevo nombre");
-        String nuevaRaza = pedirDato("Nueva raza");
-        int nuevaEdad = pedirDatoNumerico("Nueva edad en meses");
-        double nuevoPeso = pedirDatoDouble("Nuevo peso en kg");
-        String nuevaSalud = pedirDato("Nuevo estado de salud");
+        String nuevoNombre = pedirDato("Nuevo nombre",titulo);
+        String nuevaRaza = pedirDato("Nueva raza",titulo);
+        int nuevaEdad = pedirDatoNumerico("Nueva edad en meses",titulo);
+        double nuevoPeso = pedirDatoDouble("Nuevo peso en kg",titulo);
+        String nuevaSalud = pedirDato("Nuevo estado de salud",titulo);
         listaCorral.modificar(modId, nuevoNombre, nuevaRaza, nuevaEdad, nuevoPeso, nuevaSalud);
         mostrarMensaje("Pollo modificado exitosamente.");
     }

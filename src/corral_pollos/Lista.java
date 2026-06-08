@@ -76,7 +76,7 @@ public class Lista {
         pollo.setRaza(raza);
         pollo.setEdad(edad);
         pollo.setPeso(peso);
-        pollo.setEstado_salud(estado_salud);
+        pollo.setEstadoSalud(estado_salud);
         return true;
     }
 
@@ -97,7 +97,7 @@ public class Lista {
         Nodo actual = cabeza;
         StringBuilder enfermos = new StringBuilder();
         while (actual != null) {
-            if (actual.getValor().getEstado_salud().equalsIgnoreCase("enfermo")) {
+            if (actual.getValor().getEstadoSalud().equalsIgnoreCase("enfermo")) {
                 enfermos.append(actual.getValor().toString()).append("\n");
             }
             actual = actual.getSiguiente();
@@ -116,7 +116,7 @@ public class Lista {
         int count = 0;
         Nodo actual = cabeza;
         while (actual != null) {
-            if (actual.getValor().getEstado_salud().equalsIgnoreCase("enfermo")) {
+            if (actual.getValor().getEstadoSalud().equalsIgnoreCase("enfermo")) {
                 count++;
             }
             actual = actual.getSiguiente();
@@ -128,11 +128,23 @@ public class Lista {
         int count = 0;
         Nodo actual = cabeza;
         while (actual != null) {
-            if (actual.getValor().getEstado_salud().equalsIgnoreCase("vacunado")) {
+            if (actual.getValor().getEstadoSalud().equalsIgnoreCase("vacunado")) {
                 count++;
             }
             actual = actual.getSiguiente();
         }
         return count;
+    }
+
+    public String mostrarIdsSanos(){
+        StringBuilder sanos = new StringBuilder();
+        Nodo actual = cabeza;
+        while (actual != null) {
+            if (actual.getValor().getEstadoSalud().equalsIgnoreCase("sano")) {
+                sanos.append("ID: ").append(actual.getValor().getId()).append("\n");
+            }
+            actual = actual.getSiguiente();
+        }
+        return sanos.toString();
     }
 }
