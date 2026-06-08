@@ -19,6 +19,8 @@ public class MenuVacunacion extends Menu {
     @Override
     protected String getOpciones() {
         return """
+                LÍNEA DE VACUNACIÓN\s
+                
                 1. Formar pollo para vacunación
                 2. Vacunar siguiente pollo 
                 3. Consultar siguiente pollo en la fila
