@@ -11,7 +11,7 @@ public abstract class Menu {
         int opcionSeleccionada;
         do {
             try {
-                 opcionSeleccionada= pedirDatoNumerico(getOpciones() + "\nElige una opcion");
+                 opcionSeleccionada= pedirDatoNumerico(getOpciones() + "\nElige una opcion", "Menu de opciones");
             } catch (CancelarException e) {
                 return;
             }
@@ -24,11 +24,11 @@ public abstract class Menu {
         } while (!cerrarMenu);
     }
 
-    protected String pedirDato(String mensaje) throws CancelarException {
+    protected String pedirDato(String mensaje, String titulo) throws CancelarException {
         String dato;
         ErrorValidacion datoValidado;
         do {
-            dato = JOptionPane.showInputDialog(null, mensaje);
+            dato = JOptionPane.showInputDialog(null, mensaje,titulo,JOptionPane.QUESTION_MESSAGE);
             if (dato == null) {
                 throw new CancelarException();
             }
@@ -40,11 +40,11 @@ public abstract class Menu {
         return dato;
     }
 
-    protected int pedirDatoNumerico(String mensaje) throws CancelarException {
+    protected int pedirDatoNumerico(String mensaje, String titulo) throws CancelarException {
         String dato;
         ErrorValidacion datoValidado;
         do {
-            dato = pedirDato(mensaje);
+            dato = pedirDato(mensaje, titulo);
             datoValidado = validarEntero(dato);
             if (!datoValidado.esValido()) {
                 mostrarError(datoValidado.getMensajeError());
@@ -53,11 +53,11 @@ public abstract class Menu {
         return Integer.parseInt(dato);
     }
 
-    protected double pedirDatoDouble(String mensaje) throws CancelarException {
+    protected double pedirDatoDouble(String mensaje, String titulo) throws CancelarException {
         String dato;
         ErrorValidacion datoValidado;
         do {
-            dato = pedirDato(mensaje);
+            dato = pedirDato(mensaje, titulo);
             datoValidado = validarDouble(dato);
             if (!datoValidado.esValido()) {
                 mostrarError(datoValidado.getMensajeError());
@@ -67,7 +67,11 @@ public abstract class Menu {
     }
 
     protected void mostrarMensaje(String mensaje){
-        JOptionPane.showMessageDialog(null,mensaje, "Titulo" ,JOptionPane.PLAIN_MESSAGE);
+        JOptionPane.showMessageDialog(null,mensaje);
+    }
+
+    protected void mostrarDatos(String mensaje, String titulo){
+        JOptionPane.showMessageDialog(null,mensaje, titulo ,JOptionPane.PLAIN_MESSAGE);
     }
 
     protected void mostrarError(String mensaje){
