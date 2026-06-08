@@ -3,8 +3,8 @@ package linea_vacunacion;
 import modelos.Pollo;
 
 public class Cola {
-    private Nodo frente;
-    private Nodo fin;
+    private NodoCola frente;
+    private NodoCola fin;
     private int tamaño;
 
     public Cola() {
@@ -18,7 +18,7 @@ public class Cola {
     }
 
     public void encolar(Pollo pollo){
-        Nodo nuevoNodo = new Nodo(pollo);
+        NodoCola nuevoNodo = new NodoCola(pollo);
         if (vacia()){
             frente = nuevoNodo;
             fin = nuevoNodo;
@@ -43,7 +43,7 @@ public class Cola {
     }
 
     public String mostrarCola(){
-        Nodo actual = frente;
+        NodoCola actual = frente;
         StringBuilder pollosCola = new StringBuilder();
         while (actual != null){
             pollosCola.append(actual.getValor().toString()).append("\n");
@@ -56,7 +56,7 @@ public class Cola {
         return tamaño;
     }
 
-
-
-
+    public Pollo getFrente() {
+        return frente.getValor();
+    }
 }
