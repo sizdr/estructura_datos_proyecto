@@ -10,7 +10,7 @@ public class Pollo {
     private double peso;
 
 
-    private String estado_salud;
+    private String estadoSalud;
     private boolean activo;
 
     public Pollo(String nombre, String raza, int edad, double peso, String estado_salud) {
@@ -19,7 +19,7 @@ public class Pollo {
         this.raza = raza;
         this.edad = edad;
         this.peso = peso;
-        this.estado_salud = estado_salud;
+        this.estadoSalud = estado_salud;
         this.activo = true;
     }
 
@@ -67,12 +67,12 @@ public class Pollo {
         this.peso = peso;
     }
 
-    public String getEstado_salud() {
-        return estado_salud;
+    public String getEstadoSalud() {
+        return estadoSalud;
     }
 
-    public void setEstado_salud(String estado_salud) {
-        this.estado_salud = estado_salud;
+    public void setEstadoSalud(String estadoSalud) {
+        this.estadoSalud = estadoSalud;
     }
 
     public boolean isActivo() {
@@ -90,7 +90,7 @@ public class Pollo {
                 "\nRaza: " + raza +
                 "\nEdad: " + edad + " meses" +
                 "\nPeso: " + peso + " kg" +
-                "\nSalud: " + estado_salud +
+                "\nSalud: " + estadoSalud +
                 "\nActivo: " + (activo? "Si":"No");
     }
 }
